@@ -27,8 +27,8 @@ class _PokemonInfoState extends State<PokemonInfo> {
       ),
       body: Column(
         children: [
-          Text(""),
-          Text(''),
+          Text('Bulbassauro'),
+          Text('Não sei'),
           Image.network(widget.image),
         ],
       ),

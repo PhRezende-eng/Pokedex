@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pokedex/classes/pokemon.dart';
 import 'package:pokedex/component/pokemon_card.dart';
 
 class PokemonList extends StatefulWidget {
@@ -10,6 +11,7 @@ class PokemonList extends StatefulWidget {
 
 class _PokemonListState extends State<PokemonList> {
   bool isLightMode = true;
+  List pokemons = <Pokemon>[];
 
   @override
   Widget build(BuildContext context) {
@@ -46,12 +48,14 @@ class _PokemonListState extends State<PokemonList> {
               )
             ],
           ),
-          PokemonCard(
-            name: "bubassauro",
-            photo:
-                "http://2.bp.blogspot.com/-IYIS_mwIUoY/URvCsPFFbkI/AAAAAAAAIZw/HslB515tC5I/s1600/Bulbasaur_by_Xous54.png",
-            types: ['sdf', 'asd'],
-          ),
+          Row(
+              children: pokemons
+                  .map(
+                    (pokemon) => PokemonCard(
+                      pokemon: pokemon,
+                    ),
+                  )
+                  .toList())
         ],
       ),
     );

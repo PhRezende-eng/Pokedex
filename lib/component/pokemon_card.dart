@@ -1,18 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pokedex/classes/pokemon.dart';
 import 'package:pokedex/component/type_box.dart';
 import 'package:pokedex/screens/pokemon.dart';
 
 class PokemonCard extends StatelessWidget {
-  final String name;
-  final String photo;
-  final List<String> types;
-  const PokemonCard({
-    Key? key,
-    required this.name,
-    required this.photo,
-    required this.types,
-  }) : super(key: key);
+  final Pokemon pokemon;
+  const PokemonCard({Key? key, required this.pokemon}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +16,7 @@ class PokemonCard extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) => PokemonInfo(
-              image: photo,
+              image: pokemon.photo,
             ),
           ),
         );
@@ -39,11 +33,13 @@ class PokemonCard extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Padding(padding: EdgeInsets.all(8), child: Image.network(photo)),
-            Text(name),
+            Padding(
+                padding: EdgeInsets.all(8),
+                child: Image.network(pokemon.photo)),
+            Text(pokemon.name),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: types.map(
+              children: pokemon.types.map(
                 (type) {
                   return TypeBox(type: type);
                 },
