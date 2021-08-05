@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/classes/pokemon.dart';
 import 'package:pokedex/component/pokemon_card.dart';
+import 'package:pokedex/services/pokemon_api.dart';
 
 class PokemonList extends StatefulWidget {
   const PokemonList({Key? key}) : super(key: key);
@@ -11,7 +12,22 @@ class PokemonList extends StatefulWidget {
 
 class _PokemonListState extends State<PokemonList> {
   bool isLightMode = true;
-  List pokemons = <Pokemon>[];
+  List<Pokemon> pokemons = [];
+
+  @override
+  void initState() {
+    setPokemonList();
+    super.initState();
+  }
+
+  void setPokemonList() async {
+    for (int i = 1; i <= 150; i++) {
+      var newPokemon = await PokemonApi.getPokemon();
+      setState(() {
+        pokemons.add(newPokemon);
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

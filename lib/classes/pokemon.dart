@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class Pokemon {
   final String name;
   final String photo;
@@ -16,14 +14,14 @@ class Pokemon {
     List<String> types = [];
     json['types'].forEach(
       (type) => types.add(
-        type["types"]['name'],
+        type["type"]['name'],
       ),
     );
     return Pokemon(
       name: json['name'],
-      photo: json['sprites']['other']['official-atwork']['front_default'],
+      photo: json['sprites']['other']['official-artwork']['front_default'],
       id: json['id'],
-      types: types,
+      types: [],
     );
   }
 }
