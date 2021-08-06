@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 
 class PokemonInfo extends StatefulWidget {
   final String image;
-  const PokemonInfo({Key? key, required this.image}) : super(key: key);
+  final String name;
+  final int id;
+  const PokemonInfo(
+      {Key? key, required this.image, required this.name, required this.id})
+      : super(key: key);
 
   @override
   _PokemonInfoState createState() => _PokemonInfoState();
@@ -27,8 +31,8 @@ class _PokemonInfoState extends State<PokemonInfo> {
       ),
       body: Column(
         children: [
-          Text('Bulbassauro'),
-          Text('Não sei'),
+          Text(widget.name),
+          Text('${widget.id}'),
           Image.network(widget.image),
         ],
       ),

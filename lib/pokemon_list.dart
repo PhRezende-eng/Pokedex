@@ -7,10 +7,10 @@ class PokemonList extends StatefulWidget {
   const PokemonList({Key? key}) : super(key: key);
 
   @override
-  _PokemonListState createState() => _PokemonListState();
+  PokemonListState createState() => PokemonListState();
 }
 
-class _PokemonListState extends State<PokemonList> {
+class PokemonListState extends State<PokemonList> {
   bool isLightMode = true;
   List<Pokemon> pokemons = [];
 
@@ -22,7 +22,7 @@ class _PokemonListState extends State<PokemonList> {
 
   void setPokemonList() async {
     for (int i = 1; i <= 150; i++) {
-      var newPokemon = await PokemonApi.getPokemon();
+      var newPokemon = await PokemonApi.getPokemon(i);
       setState(() {
         pokemons.add(newPokemon);
       });
@@ -32,7 +32,7 @@ class _PokemonListState extends State<PokemonList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: isLightMode ? Colors.white : Colors.black,
+      backgroundColor: isLightMode ? Colors.white : Colors.grey.shade800,
       appBar: AppBar(
         title: Row(
           children: [
@@ -46,33 +46,54 @@ class _PokemonListState extends State<PokemonList> {
         ),
         centerTitle: true,
       ),
-      body: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      body: Scrollbar(
+        child: SingleChildScrollView(
+          child: Column(
             children: [
-              Text("Pokémons"),
-              IconButton(
-                onPressed: () {
-                  setState(() {
-                    isLightMode = !isLightMode;
-                  });
-                },
-                icon: Icon(
-                  Icons.dark_mode_outlined,
-                ),
-              )
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      "Pokémons",
+                      style: TextStyle(
+                          color: !isLightMode
+                              ? Colors.white
+                              : Colors.grey.shade900),
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        isLightMode = !isLightMode;
+                      });
+                    },
+                    icon: isLightMode
+                        ? Icon(
+                            Icons.dark_mode_outlined,
+                          )
+                        : Icon(
+                            Icons.light_mode_outlined,
+                            color: Colors.white,
+                          ),
+                  )
+                ],
+              ),
+              Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: pokemons
+                    .map(
+                      (pokemon) => PokemonCard(
+                        pokemon: pokemon,
+                      ),
+                    )
+                    .toList(),
+              ),
             ],
           ),
-          Row(
-              children: pokemons
-                  .map(
-                    (pokemon) => PokemonCard(
-                      pokemon: pokemon,
-                    ),
-                  )
-                  .toList())
-        ],
+        ),
       ),
     );
   }

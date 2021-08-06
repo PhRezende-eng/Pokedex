@@ -17,6 +17,8 @@ class PokemonCard extends StatelessWidget {
           MaterialPageRoute(
             builder: (context) => PokemonInfo(
               image: pokemon.photo,
+              id: pokemon.id,
+              name: pokemon.name,
             ),
           ),
         );
