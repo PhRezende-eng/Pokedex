@@ -20,12 +20,12 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Pokedex!',
+      title: 'Pokédex',
       // theme: darkMode(context) ? ThemeData.dark() : ThemeData.light(),
       // theme: ThemeData.dark(),
       // theme: ThemeData.light(),
       theme: ThemeData(
-        primarySwatch: Colors.red,
+        primarySwatch: Colors.yellow,
       ),
       home: PokemonList(),
     );

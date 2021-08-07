@@ -24,6 +24,9 @@ class _PokemonInfoState extends State<PokemonInfo> {
               width: 25,
               height: 25,
             ),
+            SizedBox(
+              width: 16,
+            ),
             Text('Pokédex'),
           ],
         ),
