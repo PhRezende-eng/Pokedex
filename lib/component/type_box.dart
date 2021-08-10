@@ -7,7 +7,12 @@ class TypeBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text(type),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Text(type),
+        ],
+      ),
     );
   }
 }

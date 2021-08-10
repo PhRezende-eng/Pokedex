@@ -21,7 +21,7 @@ class Pokemon {
       name: json['name'],
       photo: json['sprites']['other']['official-artwork']['front_default'],
       id: json['id'],
-      types: [],
+      types: types,
     );
   }
 }

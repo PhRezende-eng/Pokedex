@@ -19,12 +19,13 @@ class PokemonCard extends StatelessWidget {
               image: pokemon.photo,
               id: pokemon.id,
               name: pokemon.name,
+              types: pokemon.types,
             ),
           ),
         );
       },
       child: Container(
-        width: 110,
+        width: 112,
         height: 160,
         decoration: BoxDecoration(
           color: Colors.white,

@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:pokedex/component/type_box.dart';
 
 class PokemonInfo extends StatefulWidget {
   final String image;
   final String name;
   final int id;
+  final List<String> types;
   const PokemonInfo(
-      {Key? key, required this.image, required this.name, required this.id})
+      {Key? key,
+      required this.image,
+      required this.name,
+      required this.types,
+      required this.id})
       : super(key: key);
 
   @override
@@ -37,6 +43,14 @@ class _PokemonInfoState extends State<PokemonInfo> {
           Text(widget.name),
           Text('${widget.id}'),
           Image.network(widget.image),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: widget.types
+                .map(
+                  (type) => TypeBox(type: type),
+                )
+                .toList(),
+          ),
         ],
       ),
     );
