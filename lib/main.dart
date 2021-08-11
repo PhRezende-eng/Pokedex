@@ -25,7 +25,7 @@ class _MyAppState extends State<MyApp> {
       // theme: ThemeData.dark(),
       // theme: ThemeData.light(),
       theme: ThemeData(
-        primarySwatch: Colors.yellow,
+        primarySwatch: Colors.blueGrey,
       ),
       home: PokemonList(),
     );

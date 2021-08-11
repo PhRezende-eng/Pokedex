@@ -21,18 +21,18 @@ class PokemonInfo extends StatefulWidget {
 class _PokemonInfoState extends State<PokemonInfo> {
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: Row(
           children: [
+            SizedBox(width: size.width * 0.13),
             Image.network(
               "https://image.flaticon.com/icons/png/512/528/528101.png",
               width: 25,
               height: 25,
             ),
-            SizedBox(
-              width: 16,
-            ),
+            SizedBox(width: 8),
             Text('Pokédex'),
           ],
         ),

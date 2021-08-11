@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/classes/pokemon.dart';
 import 'package:pokedex/component/pokemon_card.dart';
+import 'package:pokedex/component/search_pokemon_card.dart';
 import 'package:pokedex/services/pokemon_api.dart';
 
 class PokemonList extends StatefulWidget {
@@ -33,21 +34,28 @@ class PokemonListState extends State<PokemonList> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: isLightMode ? Colors.white : Colors.grey.shade800,
-      appBar: AppBar(
-        title: Row(
-          children: [
-            Image.network(
-              "https://image.flaticon.com/icons/png/512/528/528101.png",
-              width: 25,
-              height: 25,
-            ),
-            SizedBox(
-              width: 16,
-            ),
-            Text('Pokédex'),
-          ],
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(104),
+        child: AppBar(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(bottom: Radius.circular(8))),
+          title: Row(
+            children: [
+              Image.network(
+                "https://image.flaticon.com/icons/png/512/528/528101.png",
+                width: 24,
+                height: 24,
+              ),
+              SizedBox(width: 8),
+              Text('Pokédex'),
+            ],
+          ),
+          flexibleSpace: Padding(
+            padding: EdgeInsets.fromLTRB(8, 72, 8, 0),
+            child: SearchPokemonCard('Pesquisar pokémon'),
+          ),
+          centerTitle: true,
         ),
-        centerTitle: true,
       ),
       body: Scrollbar(
         child: SingleChildScrollView(
