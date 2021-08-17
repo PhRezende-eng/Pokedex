@@ -3,7 +3,6 @@ import 'package:pokedex/classes/pokemon.dart';
 import 'package:pokedex/component/pokemon_card.dart';
 import 'package:pokedex/component/search_pokemon_card.dart';
 import 'package:pokedex/services/pokemon_api.dart';
-import 'package:provider/provider.dart';
 
 class PokemonList extends StatefulWidget {
   const PokemonList({Key? key}) : super(key: key);

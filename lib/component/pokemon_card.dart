@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pokedex/classes/pokemon.dart';
+import 'package:pokedex/component/favorite_pokemon.dart';
 import 'package:pokedex/component/type_box.dart';
 import 'package:pokedex/screens/pokemon.dart';
 
@@ -24,22 +25,26 @@ class PokemonCard extends StatelessWidget {
           ),
         );
       },
-      child: Stack(
-        children: [
-          Container(
-            width: 112,
-            height: 160,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              border: Border.all(
-                color: Colors.black.withOpacity(1),
-              ),
-              borderRadius: BorderRadius.circular(5),
+      child: Container(
+        width: 104,
+        height: 183,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          border: Border.all(
+            color: Colors.black.withOpacity(1),
+          ),
+          borderRadius: BorderRadius.circular(5),
+        ),
+        child: Stack(
+          children: [
+            FavoritePokemon(
+              onPressed: () {},
             ),
-            child: Column(
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Padding(
-                    padding: EdgeInsets.all(8),
+                    padding: EdgeInsets.all(16),
                     child: Image.network(pokemon.photo)),
                 Text(pokemon.name),
                 Row(
@@ -52,8 +57,8 @@ class PokemonCard extends StatelessWidget {
                 )
               ],
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
