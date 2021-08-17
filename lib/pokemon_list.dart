@@ -3,6 +3,7 @@ import 'package:pokedex/classes/pokemon.dart';
 import 'package:pokedex/component/pokemon_card.dart';
 import 'package:pokedex/component/search_pokemon_card.dart';
 import 'package:pokedex/services/pokemon_api.dart';
+import 'package:provider/provider.dart';
 
 class PokemonList extends StatefulWidget {
   const PokemonList({Key? key}) : super(key: key);
@@ -21,13 +22,20 @@ class PokemonListState extends State<PokemonList> {
     super.initState();
   }
 
-  void setPokemonList() async {
+  Future<void> setPokemonList() async {
     for (int i = 1; i <= 150; i++) {
       var newPokemon = await PokemonApi.getPokemon(i);
       setState(() {
         pokemons.add(newPokemon);
       });
     }
+  }
+
+  Future<void> refreshScreen() async {
+    await Future.delayed(Duration(seconds: 3));
+    pokemons.clear();
+    await Future.delayed(Duration(seconds: 1));
+    setPokemonList();
   }
 
   @override
@@ -57,52 +65,57 @@ class PokemonListState extends State<PokemonList> {
           centerTitle: true,
         ),
       ),
-      body: Scrollbar(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      "Pokémons",
-                      style: TextStyle(
-                          color: !isLightMode
-                              ? Colors.white
-                              : Colors.grey.shade900),
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      setState(() {
-                        isLightMode = !isLightMode;
-                      });
-                    },
-                    icon: isLightMode
-                        ? Icon(
-                            Icons.dark_mode_outlined,
-                          )
-                        : Icon(
-                            Icons.light_mode_outlined,
-                            color: Colors.white,
-                          ),
-                  )
-                ],
-              ),
-              Wrap(
-                spacing: 8,
-                runSpacing: 8,
-                children: pokemons
-                    .map(
-                      (pokemon) => PokemonCard(
-                        pokemon: pokemon,
+      body: RefreshIndicator(
+        onRefresh: () {
+          return refreshScreen();
+        },
+        child: Scrollbar(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        "Pokémons",
+                        style: TextStyle(
+                            color: !isLightMode
+                                ? Colors.white
+                                : Colors.grey.shade900),
                       ),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        setState(() {
+                          isLightMode = !isLightMode;
+                        });
+                      },
+                      icon: isLightMode
+                          ? Icon(
+                              Icons.dark_mode_outlined,
+                            )
+                          : Icon(
+                              Icons.light_mode_outlined,
+                              color: Colors.white,
+                            ),
                     )
-                    .toList(),
-              ),
-            ],
+                  ],
+                ),
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: pokemons
+                      .map(
+                        (pokemon) => PokemonCard(
+                          pokemon: pokemon,
+                        ),
+                      )
+                      .toList(),
+                ),
+              ],
+            ),
           ),
         ),
       ),

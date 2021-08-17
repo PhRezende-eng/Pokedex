@@ -24,32 +24,36 @@ class PokemonCard extends StatelessWidget {
           ),
         );
       },
-      child: Container(
-        width: 112,
-        height: 160,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(
-            color: Colors.black.withOpacity(1),
+      child: Stack(
+        children: [
+          Container(
+            width: 112,
+            height: 160,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border.all(
+                color: Colors.black.withOpacity(1),
+              ),
+              borderRadius: BorderRadius.circular(5),
+            ),
+            child: Column(
+              children: [
+                Padding(
+                    padding: EdgeInsets.all(8),
+                    child: Image.network(pokemon.photo)),
+                Text(pokemon.name),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: pokemon.types.map(
+                    (type) {
+                      return TypeBox(type: type);
+                    },
+                  ).toList(),
+                )
+              ],
+            ),
           ),
-          borderRadius: BorderRadius.circular(5),
-        ),
-        child: Column(
-          children: [
-            Padding(
-                padding: EdgeInsets.all(8),
-                child: Image.network(pokemon.photo)),
-            Text(pokemon.name),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: pokemon.types.map(
-                (type) {
-                  return TypeBox(type: type);
-                },
-              ).toList(),
-            )
-          ],
-        ),
+        ],
       ),
     );
   }
