@@ -22,7 +22,7 @@ class PokemonListState extends State<PokemonList> {
   }
 
   Future<void> setPokemonList() async {
-    for (int i = 1; i <= 150; i++) {
+    for (int i = 1; i <= 50; i++) {
       var newPokemon = await PokemonApi.getPokemon(i);
       setState(() {
         pokemons.add(newPokemon);
@@ -33,7 +33,7 @@ class PokemonListState extends State<PokemonList> {
   Future<void> refreshScreen() async {
     await Future.delayed(Duration(seconds: 3));
     pokemons.clear();
-    await Future.delayed(Duration(seconds: 1));
+    await PokemonApi.getPokemon(1);
     setPokemonList();
   }
 

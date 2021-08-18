@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:pokedex/classes/pokemon.dart';
 
 class PokemonApi {
-  static Future<Pokemon> getPokemon(int pokemonNumber) async {
+  static Future<Pokemon> getPokemon(int? pokemonNumber) async {
     var url = Uri.parse('https://pokeapi.co/api/v2/pokemon/$pokemonNumber');
     var response = await http.get(url);
     var data =
